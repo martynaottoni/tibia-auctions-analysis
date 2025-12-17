@@ -1,0 +1,34 @@
+# Core dependencies for auction scraper
+requests==2.31.0
+aiohttp==3.9.1
+psycopg2-binary==2.9.7
+python-dotenv==1.0.0
+
+# Development and testing dependencies
+pytest==7.4.2
+pytest-cov==4.1.0
+black==23.7.0
+flake8==6.0.0
+mypy==1.5.1
+
+# Optional: For enhanced logging (if needed)
+# structlog==23.1.0
+
+# Data analysis and visualization
+pandas==2.1.1
+numpy==1.24.3
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.17.0
+
+# Machine learning
+scikit-learn==1.3.0
+xgboost==1.7.6
+
+# Interactive dashboards
+streamlit==1.28.1
+dash==2.14.1
+
+# Statistical analysis
+scipy==1.11.3
+statsmodels==0.14.0

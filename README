@@ -1,0 +1,23 @@
+Tibia Auction Market Analysis
+
+Project Overview
+Advanced data analysis of Tibia character auction market using Python and machine learning.
+
+Dataset
+- Size: 1.2M+ auction records
+- Time Period: [Q4 2021- Q4 2025]
+- Source: Tibia.com auction house
+
+Technologies Used
+- Python (pandas, numpy, scikit-learn)
+- PostgreSQL
+- Plotly/Seaborn for visualization
+- Jupyter Notebooks
+
+Analysis Goals
+1. Price trend analysis and seasonality patterns
+2. Character feature correlation with auction prices
+3. World segmentation and market differences
+4. Predictive modeling for character valuations
+
+Project Structure
