@@ -54,4 +54,5 @@ def predict_character_price(character_data):
     df = df[required_cols]
     
     prediction = model.predict(df)[0]
-    return float(prediction)
+    return float(np.expm1(prediction))
+
