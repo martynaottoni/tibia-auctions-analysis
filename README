@@ -1,23 +1,167 @@
-Tibia Auction Market Analysis
+# Tibia Auction Market Analysis
 
-Project Overview
-Advanced data analysis of Tibia character auction market using Python and machine learning.
+Advanced data analysis and ML-powered price prediction for Tibia character auctions.
 
-Dataset
-- Size: 1.2M+ auction records
-- Time Period: [Q4 2021- Q4 2025]
+## Project Overview
+
+Analyzing 1.1M+ historical auction records to understand character pricing dynamics and build a production-ready price prediction service.
+
+Key Achievement: R² = 0.8582 on test set – model explains 85.8% of price variance
+
+## Dataset
+
+- Size: 1.1M+ auction records
+- Time Period: Q4 2021 - Q4 2025
 - Source: Tibia.com auction house
+- Features: 30+ character attributes (level, skills, items, achievements, etc.)
 
-Technologies Used
-- Python (pandas, numpy, scikit-learn)
-- PostgreSQL
-- Plotly/Seaborn for visualization
-- Jupyter Notebooks
+## Technologies
 
-Analysis Goals
-1. Price trend analysis and seasonality patterns
-2. Character feature correlation with auction prices
-3. World segmentation and market differences
-4. Predictive modeling for character valuations
+- Data Processing: Python, pandas, numpy
+- Database: PostgreSQL
+- ML: XGBoost, scikit-learn
+- Visualization: Plotly, Seaborn
+- API: FastAPI
+- UI: Streamlit
+- Notebooks: Jupyter
 
-Project Structure
+## Project Structure
+
+```
+tibia_analysis/
+├── notebooks/
+│   ├── data_exploration.ipynb          # EDA & feature analysis
+│   ├── price_analysis_modeling.ipynb    # Model training & evaluation
+│   └── tibia_price_model.pkl            # Trained XGBoost model
+├── scripts/
+│   ├── price_predictor.py               # Feature engineering & predictions
+│   ├── api.py                           # FastAPI backend
+│   └── streamlit_app.py                 # Streamlit UI
+├── outputs/                             # Generated charts & visualizations
+└── README.md
+```
+
+## Quick Start
+
+### Local Testing
+
+1. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+2. Start FastAPI backend:
+```bash
+uvicorn scripts.api:app --reload
+```
+
+3. Start Streamlit UI (in another terminal):
+```bash
+streamlit run scripts/streamlit_app.py
+```
+
+4. Open browser:
+- Streamlit: http://localhost:8501
+- API docs: http://localhost:8000/docs
+
+## Local Testing vs Production
+
+Local Testing (localhost):
+- Streamlit: http://localhost:8501
+- API docs: http://localhost:8000/docs
+- Only accessible from your machine
+- Perfect for development and testing
+
+Production (after deployment):
+- Streamlit: [deployed URL on Streamlit Cloud]
+- API: [deployed URL on Render/Railway]
+- Accessible worldwide
+- See Deployment section below
+
+## Features
+
+### Data Analysis
+- Correlation analysis between character stats and prices
+- Vocation-specific skill analysis
+- Market segmentation by world type (PvP/PvE)
+- Price distribution and seasonality patterns
+
+### Machine Learning Model
+- Algorithm: XGBoost Regressor
+- Training Data: 815K+ characters
+- Features: 30 engineered features including:
+  - Vocation-specific main skills
+  - Main skill percentile ranking
+  - Character achievements & items
+  - Server configuration (PvP type, location)
+
+### Price Prediction Service
+- API Endpoint: POST /predict
+- Input: Character stats (JSON)
+- Output: Predicted price in TC (Tibia Coins)
+- Accuracy: MAE = 809 TC, RMSE = 1,801 TC
+
+### Interactive UI
+- Vocation-specific input forms
+- Real-time price predictions
+- Example character loader for demo
+- Responsive design
+
+## Key Insights
+
+1. Level is King: Strongest price predictor (0.66 correlation)
+2. Charm Matters: Charm total is second most important (0.63 correlation)
+3. Domain Knowledge Wins: Main Skill Percentile (vocation-specific ranking) is crucial
+4. Market Variance: Prices range from 50 TC to 500k+ TC – log scale modeling essential
+
+## What I Learned
+
+- Feature engineering importance for domain-specific problems
+- Log scale transformation for skewed distributions
+- Production ML: from notebook to API to UI
+- Vocation-specific modeling improves accuracy
+
+## Usage Example
+
+```python
+import requests
+
+character = {
+    "level": 500,
+    "vocation_id": 1,  # Knight
+    "charm_total": 4500,
+    "achievement_points": 600,
+    # ... other stats
+}
+
+response = requests.post("http://localhost:8000/predict", json=character)
+price = response.json()["predicted_price"]
+print(f"Predicted price: {price:.2f} TC")
+```
+
+## Deployment
+
+- Streamlit UI: Streamlit Cloud (free tier)
+- FastAPI Backend: Render/Railway (free tier)
+- Database: PostgreSQL (optional for production)
+
+## Model Performance
+
+| Metric | Value |
+|--------|-------|
+| R² Score | 0.8582 |
+| MAE | 809 TC |
+| RMSE | 1,801 TC |
+| Test Samples | 163K |
+
+## Links
+
+- GitHub Repository: [link]
+- Live Demo: [link - when deployed]
+- LinkedIn Post: [link]
+
+## License
+
+MIT
+
+Built with care for the Tibia community
