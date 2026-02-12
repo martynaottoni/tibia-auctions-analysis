@@ -28,14 +28,14 @@ def predict_character_price(character_data):
     df['weapon_type_club'] = (df['weapon_type'].str.lower() == 'club').astype(int)
     df['weapon_type_sword'] = (df['weapon_type'].str.lower() == 'sword').astype(int)
     
-    # One-hot encode pvp_type - wszystkie możliwe wartości
+    # One-hot encode pvp_type
     df['pvp_type_Hardcore'] = (df['pvp_type'] == 'Hardcore').astype(int)
     df['pvp_type_Open'] = (df['pvp_type'] == 'Open').astype(int)
     df['pvp_type_Optional'] = (df['pvp_type'] == 'Optional').astype(int)
     df['pvp_type_Retro Hardcore'] = (df['pvp_type'] == 'Retro Hardcore').astype(int)
     df['pvp_type_Retro Open'] = (df['pvp_type'] == 'Retro Open').astype(int)
     
-    # One-hot encode location - wszystkie możliwe wartości
+    # One-hot encode location
     df['location_BR'] = (df['location'] == 'BR').astype(int)
     df['location_EU'] = (df['location'] == 'EU').astype(int)
     df['location_NA'] = (df['location'] == 'NA').astype(int)
