@@ -117,8 +117,8 @@ if st.button("🔮 Predict Price"):
         "location": location
     }
     
-    # Send to API
-    response = requests.post("http://127.0.0.1:8000/predict", json=character_data)
+    # Send to deployed API
+    response = requests.post("https://tibia-auctions-analysis.onrender.com/predict", json=character_data)
     price = response.json()["predicted_price"]
     
     st.success(f"Predicted Price: {price:.2f} TC")
