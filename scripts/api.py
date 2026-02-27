@@ -4,6 +4,10 @@ from scripts.price_predictor import predict_character_price
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"message": "Tibia Price Predictor API is running", "docs": "/docs"}
+
 class CharacterInput(BaseModel):
     level: int
     vocation_id: int
