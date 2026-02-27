@@ -1,19 +1,17 @@
-import joblib
 import pandas as pd
 import numpy as np
 import os
 import sys
 import xgboost as xgb
 
-# Load model from JSON format
+# Load model from JSON format (more portable across versions)
 model_path = os.path.join(os.path.dirname(__file__), '..', 'notebooks', 'tibia_price_model.json')
-booster = xgb.Booster()
-booster.load_model(model_path)
-model = xgb.XGBRegressor()
-model._Booster = booster
 
 try:
-    model = joblib.load(model_path)
+    booster = xgb.Booster()
+    booster.load_model(model_path)
+    model = xgb.XGBRegressor()
+    model._Booster = booster
     print(f"Model loaded successfully from {model_path}", file=sys.stderr)
 except Exception as e:
     print(f"ERROR loading model from {model_path}: {e}", file=sys.stderr)
