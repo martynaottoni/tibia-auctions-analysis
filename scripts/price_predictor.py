@@ -3,9 +3,14 @@ import pandas as pd
 import numpy as np
 import os
 import sys
+import xgboost as xgb
 
-# Load model with proper path handling
-model_path = os.path.join(os.path.dirname(__file__), '..', 'notebooks', 'tibia_price_model.pkl')
+# Load model from JSON format
+model_path = os.path.join(os.path.dirname(__file__), '..', 'notebooks', 'tibia_price_model.json')
+booster = xgb.Booster()
+booster.load_model(model_path)
+model = xgb.XGBRegressor()
+model._Booster = booster
 
 try:
     model = joblib.load(model_path)
