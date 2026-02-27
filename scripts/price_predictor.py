@@ -2,10 +2,17 @@ import joblib
 import pandas as pd
 import numpy as np
 import os
+import sys
 
 # Load model with proper path handling
 model_path = os.path.join(os.path.dirname(__file__), '..', 'notebooks', 'tibia_price_model.pkl')
-model = joblib.load(model_path)
+
+try:
+    model = joblib.load(model_path)
+    print(f"Model loaded successfully from {model_path}", file=sys.stderr)
+except Exception as e:
+    print(f"ERROR loading model from {model_path}: {e}", file=sys.stderr)
+    raise
 
 def predict_character_price(character_data):
     df = pd.DataFrame([character_data.dict()])

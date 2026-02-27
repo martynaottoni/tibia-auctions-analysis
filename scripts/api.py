@@ -36,5 +36,11 @@ class CharacterInput(BaseModel):
 
 @app.post("/predict")
 def predict_price(character: CharacterInput):
-    price = predict_character_price(character)
-    return {"predicted_price": price}
+    try:
+        price = predict_character_price(character)
+        return {"predicted_price": price}
+    except Exception as e:
+        import traceback
+        error_msg = f"Error: {str(e)}\n{traceback.format_exc()}"
+        print(error_msg)
+        return {"error": error_msg}, 500
